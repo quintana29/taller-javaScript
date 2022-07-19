@@ -1,4 +1,20 @@
-import{Board} from "/Board.js"
+class Board{
+    constructor(width,height){
+        this.width = width;
+        this.height = height;
+        this.playing=false;
+        this.game_over=false;
+        this.bars=[];
+        
+
+    }
+      
+    get elements(){
+        let elements = this.bars;
+        return elements;
+    }
+  
+}
 
 class BoardView{
     constructor(canvas,board){
@@ -9,7 +25,7 @@ class BoardView{
         this.ctx=canvas.getContext("2d");
     }
     draw =  function(){
-        
+        console.log("jjjjjj")
         for(let i= this.board.elements.length-1; i>=0; i--) {
                 let el=this.board.elements[i];
                 draw2(this.ctx,el);
@@ -39,17 +55,23 @@ class Bar{
 }
 function draw2(ctx,element){
 
-    switch(element.kind){
-        case "rectangle":
-                ctx.fillRect(element.x,element.y,element.width,element.height);
-                 break;   
-            
+    if(element!== null && element.hasOwnProperty("kind")){      
+        console.log("ddddd")
+        switch(element.kind){
+            case "rectangle":
+                    ctx.fillRect(element.x,element.y,element.width,element.height);
+                     break;   
+                
+        }
     }
+    }
+    
  
 
 function main(){
 var board = new Board(800,400);
-let bar = new Bar(20,100,40,100,board)
+let bar = new Bar(20,100,40,100,board);
+let bar2 = new Bar(700,100,40,100,board);
 var canvas = document.getElementById('canvas');
 var board_view = new BoardView(canvas,board);
 
