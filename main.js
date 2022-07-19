@@ -34,6 +34,16 @@ class BoardView{
 }
 window.addEventListener("load",main);
 
+document.addEventListener("keydown",function(ev){
+    console.log(ev.keyCode);
+    if(ev.keyCode == 38){
+      bar.up();
+   }
+   else if(ev.keyCode == 40){
+     bar.down();
+   }
+  });
+
 class Bar{
     constructor(x,y,width,height,board){
         this.x=x;
@@ -46,13 +56,26 @@ class Bar{
         this.speed=10;
 
     }
-    /* self.Bar.prototype={
-        down: function(){
-        }
-        up: function(){
-        }
-    } */
+   
+    down(){
+        this.y+=this.speed;
+
+    }
+    up(){
+        this.y-=this.speed;
+
+    }
+    toString(){
+        return "x:"+this.x+"y:"+this.y;
+    }
+    
 }
+
+var board = new Board(800,400);
+let bar = new Bar(20,100,40,100,board);
+let bar2 = new Bar(700,100,40,100,board);
+var canvas = document.getElementById('canvas');
+var board_view = new BoardView(canvas,board);
 function draw2(ctx,element){
 
     if(element!== null && element.hasOwnProperty("kind")){      
@@ -69,11 +92,7 @@ function draw2(ctx,element){
  
 
 function main(){
-var board = new Board(800,400);
-let bar = new Bar(20,100,40,100,board);
-let bar2 = new Bar(700,100,40,100,board);
-var canvas = document.getElementById('canvas');
-var board_view = new BoardView(canvas,board);
+
 
 board_view.draw();
 }
