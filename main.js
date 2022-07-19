@@ -5,7 +5,6 @@ class Board{
         this.playing=false;
         this.bars=[];
         
-
     }
       
     get elements(){
@@ -37,8 +36,8 @@ class BoardView{
         this.ctx.clearRect(0,0,this.board.width,this.board.height);
     }
     check_Collisions(){
-        for(let i=this.board.bars.length-1;i>=0;i--){
-            let barr=this.board.bars[i];
+        for(let i = this.board.bars.length-1;i>=0;i--){
+            let barr = this.board.bars[i];
             if(hit(barr,this.board.ball)){
                 this.board.ball.collision(bar);
             }
@@ -59,18 +58,18 @@ class BoardView{
 document.addEventListener("keydown",function(ev){
     ev.preventDefault();
  
-    if(ev.code==="ArrowUp"){
+    if(ev.code === "ArrowUp"){
         bar.up();
     }
-    else if(ev.code==="ArrowDown"){
+    else if(ev.code === "ArrowDown"){
         bar.down();
-    }else if(ev.code==="KeyW"){
+    }else if(ev.code === "KeyW"){
         bar2.up();
     }
-    else if(ev.code==="KeyS"){
+    else if(ev.code === "KeyS"){
         bar2.down();
-    }else if(ev.code==="Space"){
-        board.playing= !board.playing;
+    }else if(ev.code === "Space"){
+        board.playing = !board.playing;
     }
   })
 
@@ -82,8 +81,8 @@ class Bar{
         this.height = height;
         this.board = board;
         this.board.bars.push(this)
-        this.kind="rectangle";
-        this.speed=10;
+        this.kind = "rectangle";
+        this.speed = 10;
 
     }
    
@@ -108,11 +107,11 @@ class Ball{
         this.speed_y = 0;
         this.speed_x = 3;
         this.board = board;
-        this.direction=1;
+        this.direction= -1;
         
-        this.bounce_angle=0;
-        this.max_bounce_angle=Math.PI/12;
-        this.speed=3;
+        this.bounce_angle = 0;
+        this.max_bounce_angle = Math.PI/12;
+        this.speed = 3;
 
         board.ball=this;
         this.kind="circle";
@@ -122,6 +121,12 @@ class Ball{
     move(){
         this.x+= (this.speed_x * this.direction)
         this.y+= (this.speed_y);
+    }
+    get width(){
+        return this.radius*2;
+    }
+    get height(){
+        return this.radius*2;
     }
 
     collision(bar){
@@ -135,6 +140,7 @@ class Ball{
         else this.direction=1;
 
     }
+    
 }
 function hit(a,b){
     let hit=false;
@@ -172,7 +178,7 @@ window.requestAnimationFrame(controller)
 
 function drawOptional(ctx,element){
 
-    //if(element!== null && element.hasOwnProperty("kind")){      
+    
         console.log("ddddd")
         switch(element.kind){
             case "rectangle":
@@ -184,8 +190,7 @@ function drawOptional(ctx,element){
                 ctx.fill();
                 ctx.closePath();
                 break; 
-                
-        //}
+       
     }
     }
     
